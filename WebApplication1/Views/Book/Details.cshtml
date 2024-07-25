@@ -1,0 +1,45 @@
+﻿@model WebApplication1.Models.ViewModels.BookDetailsPage
+
+@{
+    ViewBag.Title = "Books";
+}
+
+
+
+@if (Model.book.Available == false)
+{
+    <form method="post" action="@Url.Action("ReturnBook", "Book")">
+        <input class="form-control" id="id" name="id" type="text" hidden value="@Model.book.UserWhoHas" />
+        <input class="form-control" id="passedISBN" name="passedISBN" type="text" hidden value="@Model.book.ISBN" />
+        <input type="submit" value="Return" />
+    </form>
+}
+else
+{
+    <form method="post" action="@Url.Action("TakeOutBook", "Book")">
+        <label for="Title">User ID</label>
+        <input class="form-control" id="UserId" name="UserId" type="text" />
+        <input class="form-control" id="passedISBN" name="passedISBN" type="text" hidden value="@Model.book.ISBN" />
+        <input type="submit" value="Submit" />
+    </form>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Available?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.book.Title</td>
+            <td>@Model.book.Author</td>
+            <td>@Model.book.ISBN</td>
+            <td>@Model.avialabilityText</td>
+        </tr>
+      
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@model WebApplication1.Models.ViewModels.BookViewPage
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<form method="post" action="@Url.Action("CreateBook", "Book")">
+    <label for="Title">Title</label>
+    <input class="form-control" id="Title" name="Title" type="text" />
+
+    <label for="Title">Author</label>
+    <input class="form-control" id="Author" name="Author" type="text" />
+
+    <label for="Title">ISBN</label>
+    <input class="form-control" id="ISBN" name="ISBN" type="text" />
+
+    <input type="submit" value="Submit" />
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Available?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+        </tr>
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Author</td>
+                <td>@item.ISBN</td>
+                <td>@item.Available.ToString()</td>
+                <td><a href="@Url.Action("Details","Book", new {ISBN = item.ISBN})">Edit</a></td>
+                <td><a href="@Url.Action("DeleteBook", "Book", new {ISBN = item.ISBN})">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

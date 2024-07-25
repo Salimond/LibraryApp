@@ -1,0 +1,24 @@
+﻿@model WebApplication1.Models.ViewModels.UserDetailsPage
+@{
+    ViewBag.Title = "User";
+}
+
+<p>@Model.user.Username</p>
+
+<p>Borrowed books</p>
+<table>
+    <tbody>
+        <tr>
+            <td></td>
+        </tr>
+        @foreach (var item in Model.books)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Author</td>
+                <td>@item.ISBN.ToString()</td>
+                <td><a href="@Url.Action("ReturnBook","User", new {id = Model.user.UserId, isbn = item.ISBN})">Return</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

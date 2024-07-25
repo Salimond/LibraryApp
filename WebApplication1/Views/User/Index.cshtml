@@ -1,0 +1,35 @@
+﻿@model WebApplication1.Models.ViewModels.UserViewPage
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<form method="post" action="@Url.Action("CreateUser", "User")">
+    <label for="Title">Username</label>
+    <input class="form-control" id="Username" name="Username" type="text" />
+
+    <input type="submit" value="Submit" />
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+        </tr>
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>@item.UserId.ToString()</td>
+                <td>@item.Username</td>
+                <td><a href="@Url.Action("Details","User", new {id = item.UserId})">Edit</a></td>
+                <td><a href="@Url.Action("DeleteUser", "User", new {id = item.UserId})">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
