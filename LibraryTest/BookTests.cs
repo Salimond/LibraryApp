@@ -65,7 +65,17 @@ namespace LibraryTest
         [TestMethod]
         public void TakeOutBook_Success()
         {
+            _bookRepository.AddBook("name1", "name1", 123);
+            _userRepository.AddUser("Username1");
+            var userList = _userRepository.GetAllUsers();
+            _userRepository.TakeOutBook(userList[0].UserId, 123);
+            _bookRepository.TakeOutBook(123, userList[0].UserId);
 
+            Book book = _bookRepository.GetBookByISBN(123);
+
+            Assert.AreEqual(userList[0].BooksISBN[0], 123);
+            Assert.IsFalse(book.Available);
+            Assert.AreEqual(book.UserWhoHas, userList[0].UserId);
         }
     }
 }
